@@ -1,0 +1,15 @@
+{% extends "adminpanel/base_without_footer.html" %}
+{% block content %}
+<div class="admin-section">
+    <h2>Internship Students</h2>
+    <a href="{% url 'adminpanel:create_intern' %}">Add New Intern</a>
+    {% for data in intern_form_data %}
+        <div>
+            <p>
+                {{ data }} <a href="{% url 'adminpanel:interns_detail' data.pk %}">View Details</a>
+            </p>
+        </div>
+
+</div>
+{% endfor %}
+{% endblock content %}

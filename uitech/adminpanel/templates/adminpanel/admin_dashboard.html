@@ -1,0 +1,24 @@
+{% extends "adminpanel/base_without_footer.html" %}
+{% block content %}
+
+<div class="admin-section">
+    <h2 class="admin-title">Admin Dashboard</h2>
+    <div class="admin-card-container">
+        <a class="admin-card-link" href="{% url 'adminpanel:interns_list' %}">
+            <div class="admin-card">
+                <div class="admin-card-body">
+                  <h5 class="admin-card-title">Internship Students</h5>
+                </div>
+            </div>
+        </a>
+        <a class="admin-card-link" href="{% url 'adminpanel:smart_hiring' %}">
+            <div class="admin-card">
+                <div class="admin-card-body">
+                  <h5 class="admin-card-title">Smart Hiring</h5>
+                </div>
+            </div>
+        </a>
+    </div>    
+</div>
+
+{% endblock content %}

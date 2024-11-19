@@ -1,0 +1,23 @@
+{% extends 'adminpanel/base_without_footer.html' %}
+
+{% block content %}
+<div class="admin-section">
+    <div class="container mt-4 mb-5">
+        {% if interns_data.profile_pic %}
+            <img class="profile_pic" src="{{ interns_data.profile_pic.url }}" alt="Profile Picture"/>
+        {% else %}
+            <img src="{% static 'uitech/uitimg/hr.jpeg' %}" alt="Profile Picture"/>
+        {% endif %}
+        <h2>Detail for {{ interns_data.full_name }}</h2>
+        <ul>
+        <li>Name: {{ interns_data.full_name }}</li>
+        <li>Course: {{ interns_data.course }}</li>
+        </ul>
+        <div>
+            <a href="{% url 'adminpanel:edit_intern' interns_data.pk %}">Edit</a>
+            <a href="{% url 'adminpanel:delete_intern' interns_data.pk %}">Delete</a>
+        </div>
+        <a href="{% url 'adminpanel:interns_list' %}" class="btn btn-primary">Back to Internship Students</a>
+    </div>
+</div>
+{% endblock %}

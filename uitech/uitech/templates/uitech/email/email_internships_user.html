@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UIT Internship Registration Confirmation</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f9f9f9;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+        <tr>
+            <td align="center" style="padding: 20px;">
+                <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #ddd; background-color: #ffffff;">
+                    <tr>
+                        <td align="center" style="padding: 20px;">
+                            <img src="https://uitech.in/static/uitech/uitimg/logo.png" alt="Company Logo" style="max-width: 200px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding: 20px;">
+                            <p style="text-align: left; font-size: 18px; margin: 0; padding: 10px 0;">Dear {{ name }}, <br>
+                            Thank you for registering for an internship with UIT. We have received your details and will contact you soon for further steps.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 20px;">
+                            <h2 style="text-align: center; font-size: 22px; font-weight: bold; margin: 0; padding: 10px 0; border-bottom: 2px solid #007bff;">Here are the details you submitted:</h2>
+                            <table role="presentation" cellpadding="10" cellspacing="0" width="100%" style="border-collapse: collapse; border-bottom: 2px solid #007bff;">
+                                <tr>
+                                    <th align="left" style="font-weight: bold;">Name:</th>
+                                    <td>{{ name }}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left" style="font-weight: bold;">Email:</th>
+                                    <td>{{ email }}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left" style="font-weight: bold;">Phone:</th>
+                                    <td>{{ phone }}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left" style="font-weight: bold;">Year of Passout:</th>
+                                    <td>{{ passout_year }}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left" style="font-weight: bold;">Graduation</th>
+                                    <td>{{ graduation }}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left" style="font-weight: bold;">Course</th>
+                                    <td>{{ course }}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left" style="font-weight: bold;">Internship Duration</th>
+                                    <td>{{ duration }}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left" style="font-weight: bold;">Gender</th>
+                                    <td>{{ gender }}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left" style="font-weight: bold;">Source</th>
+                                    <td>{{ source }}</td>
+                                </tr>
+                                <tr>
+                        <td align="center" style="padding: 20px;">
+                            <p style="text-align: left; font-size: 22px; font-weight: bold; margin: 0; padding: 10px 0;">
+                                Best Regards, <br>
+                                UIT Team</p>
+                        </td>
+                    </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

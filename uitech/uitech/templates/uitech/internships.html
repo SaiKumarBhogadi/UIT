@@ -1,0 +1,160 @@
+{% extends 'uitech/base2.html' %}
+
+{% block content %}
+
+
+<div class="intern-box">
+    <h1>Internships</h1>
+</div>
+
+    <div class="scroll-wrapper">
+        <div class="scroll">
+        
+        {% for intern in interns_data %}
+            <div class="pic">
+                {% if intern.profile_pic %}
+                    <img class="profile_pic" src="{{ intern.profile_pic.url }}" alt="Profile Picture" class="openings-profile-pic" style="width: 120px; height: 120px; border-radius: 50%; margin-right: 12px;">
+                {% else %}
+                    <img src="{% static 'uitech/uitimg/hr.jpeg' %}" alt="Profile Picture" class="openings-profile-pic">
+                {% endif %} 
+            
+            <h4>{{ intern.full_name }}</h4> 
+            <h5> {{ intern.course }} </h5>
+            </div>
+            {% endfor %}
+
+        </div>
+             
+    </div>
+
+    <div class="container">
+        <section class="contact-form-section">
+          <div class="row">
+            <h2 id="register-now" >Register Here</h2>
+            <div class="col-lg-6">
+              <div class="content">
+  
+                <p id="intern-para">For skill assessments or to check your current level, please fill out the form below. Our team will evaluate your details and provide feedback as soon as possible.
+  
+                </p>
+                {% if messages %}
+                  {% for message in messages %}
+                      <div class="{% if message.tags %}alert alert-{{ message.tags }}{% endif %}" style="text-align: center; font-weight: bold; color: red; margin-top: 20px;">
+                          {{ message }}
+                      </div>
+                  {% endfor %}
+                {% endif %}
+
+                {% if submitted %}
+                    <p style="text-align: center; font-weight: bold; color: green; margin-top: 20px;">Your registration was successful. Check your email for confirmation. You can submit another form if needed.</p>
+                    <a href="{% url 'uitech:internships' %}" class="link-info" style="text-align: center; font-weight: bold;">Submit Another</a>
+                {% else %}
+                <form class="contact-form" action="{% url 'uitech:internships' %}" method="post">
+                  {% csrf_token %}
+                  {{ form.non_field_errors }}
+                  <div class="row">
+                      <div class="col-md-6">
+                          <label for="name">Name:</label>
+                          {{ form.name }}
+                          {{ form.name.errors }}
+                      </div>
+                      <div class="col-md-6">
+                          <label for="email">Email:</label>
+                          {{ form.email }}
+                          {{ form.email.errors }}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <label for="phone">Phone:</label>
+                          {{ form.phone }}
+                          {{ form.phone.errors }}
+                      </div>
+                      <div class="col-md-6">
+                          <label for="passout_year">Year of Passout:</label>
+                          {{ form.passout_year }}
+                          {{ form.passout_year.errors }}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <label for="graduation">Graduation</label>
+                          {{ form.graduation }}
+                          {{ form.graduation.errors }}
+                      </div>
+                      <div class="col-md-6">
+                          <label for="course">Select Course</label>
+                          {{ form.course }}
+                          {{ form.course.errors }}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <label for="duration">Internship Duration</label>
+                          {{ form.duration }}
+                          {{ form.duration.errors }}
+                      </div>
+                      <div class="col-md-6">
+                          <label for="gender">Gender</label>
+                          {{ form.gender }}
+                          {{ form.gender.errors }}
+                      </div>
+                  </div>
+                  <label for="source">Where Did You Hear About Us?</label>
+                  {{ form.source }}
+                  {{ form.source.errors }}
+                  <div class="row">
+                    <!-- Render checkbox and label in the same line -->
+                    <div class="col-md-1">
+                      {{ form.terms }}
+                    </div>
+                    <div class="col-md-11">
+                      <label for="terms" style="cursor: pointer; margin-left: 5px;">
+                        I have read and agree to the Terms and Conditions and Privacy Policy
+                    </label>
+                    <!-- Display errors for terms field -->
+                    {% if form.terms.errors %}
+                      <span class="error-message" style="color: red; margin-left: 10px;">
+                          {{ form.terms.errors.0 }}
+                      </span>
+                    {% endif %}
+                    </div>
+                  </div>                
+                  <button type="submit">Submit</button>
+                </form>
+                {% endif %} 
+                <p class="form-p"> Join UIT today and take the first step towards a successful career in technology and innovation. Let us help you turn your academic achievements into professional accomplishments.</p>
+              </div>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5" id="intern-content">
+                <h1>UIT Internships
+                </h1>
+                <p class="intern-h4">Shaping the Future of Fresh Graduates</p>
+                <h3>Internship Opportunities with UIT</h3>
+                <p>
+                  UIT partners with top companies to offer internships where students gain practical experience, apply their skills, and work alongside industry professionals, giving them a competitive edge in the job market.</p>
+               <h3>Real-Time Project-Based Training</h3>
+            <p>
+
+              Our Real-Time Project-Based Training immerses students in live projects that reflect industry challenges, enhancing technical skills, problem-solving, teamwork, and adaptability—key qualities that employers value.</p>
+            
+            <h3>100% Placement Assistance</h3>
+            <p>
+              UIT provides 100% Placement Assistance after your internship, connecting you with job opportunities that align with your skills. Our extensive network of partner companies ensures a wide range of career options for every graduate.</p>
+              <h3>Why Choose UIT?</h3>
+              <p>
+               <span class="blue">Real-Time Experience:</span>  Learn by doing with projects that reflect actual industry demands. <br>
+               <span class="blue"> Professional Internships:</span> Gain valuable work experience and build your professional network. <br>
+               <span class="blue">Guaranteed Placement Support:</span>  Benefit from our commitment to your career success with 100% placement assistance. 
+                
+               </p>
+            
+            </div>
+           
+          </div>
+        </section>
+    </div>
+
+
+{% endblock %}

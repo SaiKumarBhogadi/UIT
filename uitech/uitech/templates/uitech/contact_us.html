@@ -1,0 +1,134 @@
+{% extends 'uitech/base.html' %}
+{% block content %}
+
+
+<div class="hero-section">
+  <div class="overlay">
+    <video autoplay muted loop id="background-video" class="img-fluid">
+      <source src="{% static 'uitech/uitimg/contact_us.mp4' %}" type="video/mp4">
+    </video>
+    <!-- <img src="" alt="" width="100%" height="500px" style="opacity: 0.3;"> -->
+  </div>
+
+  <div class="hero-content">
+    <h1 style="font-size: 70px;">Contact Us</h1>
+    <div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container">
+    <div class="row">
+      <h2 class="contact-h2">Get In Touch</h2>
+      <div class="col-lg-6">
+        <div class="map-responsive">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.4137451858675!2d78.38850367410368!3d17.485447284213592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb922c2195f8d5%3A0x1bb5ea12e616b48f!2sManjeera%20Trinity%20Corporate%2C%20JNTU%20Rd%2C%20Sai%20Nagar%2C%20Kukatpally%2C%20Hyderabad%2C%20Telangana%20500072!5e0!3m2!1sen!2sin!4v1692008609827!5m2!1sen!2sin"
+            width="100%" height="400px"
+            style="border:1px solid #0070d2;border-top-left-radius: 30px; border-top-right-radius: 200px;border-bottom-left-radius: 200px;"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+      <div class="col-lg-6 contact-info">
+        <div class="contact-item">
+          <span class="icon"><a href=" https://wa.me/919948322888" target="_blank"><i
+                class="fa-brands fa-square-whatsapp" style="color: rgb(58, 157, 58);margin-left:7px;"></i></a></span>
+          <div>
+            <h5>Whatsapp:</h5>
+            <p><a href=" https://wa.me/919948322888" target="_blank">9948322888</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="icon">📧</span>
+          <div>
+            <h5>Email:</h5>
+            <p><a href="mailto:info@uitech.in">info@uitech.in</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="icon">📍</span>
+          <div>
+            <h5>Office Address:</h5>
+            <p>Office no:#1403, 14th Floor, Manjeera Trinity Corporate, KPHB Phase 3, Kukatpally, Hyderabad, Telangana
+              500072.</p>
+          </div>
+          <div>
+            <h5>Training Location:</h5>
+            <p>UIT, Office Building:15-31-60, #2nd floor, Dharma Reddy Colony, JNTU Rd, K P H B Phase 1, Kukatpally, Hyderabad, Telangana 500072.</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="icon">⏰</span>
+          <div>
+            <h5>Office Hours:</h5>
+            <p>Monday-Saturday: 9:30AM-6:30PM<br>Sunday: Closed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Contact Form Section -->
+<div class="container">
+  <section class="contact-form-section">
+    <div class="row">
+      <h2 style="margin-top: 30px;">Send as a message </h2>
+      <div class="col-lg-6">
+        <div class="content">
+
+          <p>For general inquiries, feedback, or more information about our services, please fill out the form below.
+            Our team will get back to you as soon as possible.</p>
+          {% if success %}
+            <div style="text-align: center; font-weight: bold; color: green; margin-top: 20px;">
+              {{ success }}
+            </div>
+          {% else %}
+
+          <form class="contact-form" action="#" method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-lg-6">
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+              </div>
+              <div class="col-lg-6">
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+              </div>
+            </div>
+        
+            <div class="row">
+              <div class="col-lg-6">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+              </div>
+              <div class="col-lg-6">
+                {{ form.phone.label_tag }}
+                {{ form.phone }}
+              </div>
+            </div>
+          
+
+            {{ form.subject.label_tag }}
+            {{ form.subject }}
+
+            {{ form.message.label_tag }}
+            {{ form.message }}
+
+            <button type="submit">Submit</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-6" id="form-img">
+        <img src="{% static 'uitech/uitimg/contact.png' %}" alt="">
+      </div>
+
+    </div>
+  </section>
+</div>
+  {% endblock %}

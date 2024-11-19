@@ -1,0 +1,76 @@
+{% extends 'adminpanel/base_without_footer.html' %}
+{% block content %}
+<div class="container" id="hiring-detail">
+<div class="admin-section-detail">
+    <div class="profile-container" style="text-align: center;">
+        {% if hiring_data.profile_pic %}
+            <img class="profile_pic" src="{{ hiring_data.profile_pic.url }}" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;"/>
+        {% else %}
+            <img class="profile_pic" src="{% static 'uitech/uitimg/hr.jpeg' %}" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;"/>
+        {% endif %}
+    </div> 
+    <h2 class="details-h2">Detail for {{ hiring_data.full_name }} - {{ hiring_data.designation }}</h2>
+    <table >
+            <tr class="admin-header">
+                <th>Field</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td>Company Name</td>
+                <td>{{ hiring_data.company_name }}</td>
+            </tr>
+            <tr>
+                <td>Domain</td>
+                <td>{{ hiring_data.domain }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ hiring_data.email }}</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>{{ hiring_data.phone }}</td>
+            </tr>
+            <tr>
+                <td>Experience</td>
+                <td>{{ hiring_data.experience }}</td>
+            </tr>
+            <tr>
+                <td>No. of Vacancies</td>
+                <td>{{ hiring_data.positions }}</td>
+            </tr>
+            <tr>
+                <td>Package in LPA</td>
+                <td>{{ hiring_data.salary }}</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{ hiring_data.location }}</td>
+            </tr>
+            <tr>
+                <td>Job Description</td>
+                <td>{% if hiring_data.job_description %} <a href="{{ hiring_data.job_description.url }}" class="download-link">Download {% else %}N/A{% endif %}</a></td>
+            </tr>
+            <tr>
+                <td>Message</td>
+                <td>{% if hiring_data.message %}{{ hiring_data.message }} {% else %}N/A{% endif %}</td>
+            </tr>
+            <tr>
+                <td>Note</td>
+                <td>{% if hiring_data.note %}{{ hiring_data.note }} {% else %}N/A{% endif %}</td>
+            </tr>
+    </table>
+</div>
+</div>
+
+<div class="container" id="action-buttons">
+<div class="button-container">
+    <button style="background-color: yellow; width:100px;margin-left:10px;"><a href="{% url 'adminpanel:edit_hiring' hiring_data.id %}" style="color: black;">Edit</a></button>
+     <button style="background-color: red; width:100px;"><a href="{% url 'adminpanel:delete_hiring' hiring_data.id %}">Delete</a> </button>
+     <button style="background-color: #0070d2;width:150px;margin-right:10px;"><a href="{% url 'adminpanel:smart_hiring' %}"  >Back to Dashboard</a> </button>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'uitech/base2.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="background d-flex flex-column flex-lg-row align-items-center w-100" style="background-image: url('{% static "uitech/uitimg/background.avif" %}');">
+        <div class="right">
+          <img src="{% static 'uitech/uitimg/jen1-removebg-preview.png' %}" alt="" class="img-fluid" />  
+        </div>
+        <div class="hire ms-lg-5 text-center text-lg-start">
+            <h4 class="mt-3 fs-4 fw-medium">HIRING IS MORE EASIER NOW</h4>
+            <h1 class="mt-3 fw-bold">Hire Right Staff</h1>
+            <h1 class="mt-3 fw-bold text-primary">For Your Team</h1>
+            <div id="click">
+                <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start mt-5">
+                <!-- Share Your Requirements Button -->
+                <a href="#formrow"><button type="button" class="btn btn-primary me-sm-3 mb-3 mb-sm-0 btn-lg" style="width: 270px;">
+                Share Your Requirements
+                </button></a> 
+        
+                <!-- Contact Us Now Button -->
+                <a href="{% url 'uitech:contact_us' %}"><button type="button" class="btn btn-info btn-lg" style="width: 200px;color: white;">
+                    Contact Us
+                </button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<!--ending for banner-->
+
+<!-- Display success message -->
+{% if messages %}
+<div class="alert alert-success" role="alert">
+{% for message in messages %}
+    {{ message }}
+{% endfor %}
+</div>
+{% endif %}
+
+
+<!--Form-->
+<div class="container" id="formbox">
+    <div class="row" id="formrow">
+      <h1 class="text-center">Drop Your Requirement</h1>
+      <div class="col-lg-5 d-flex justify-content-center mb-4 mb-lg-0" id="formimage">
+        <img src="{% static 'uitech/uitimg/formimage.png' %}" alt="Form Image" class="img-fluid">
+      </div>
+      <div class="col-lg-7">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <h3 class='smart-form'>HR Details</h3>
+            <div class="col-lg-6">{{ form.full_name.label_tag }}<span style="color: red;">*</span>{{ form.full_name }}</div>
+            <div class="col-lg-6">{{ form.designation.label_tag }}<span style="color: red;">*</span>{{ form.designation }}</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">{{ form.phone.label_tag }}<span style="color: red;">*</span>{{ form.phone }}</div>
+            <div class="col-lg-6">{{ form.profile_pic.label_tag }}<span class='small-size' style="font-size: 13px;"> (Optional)</span> {{ form.profile_pic }}</div>
+          </div>
+          <div class="row">
+            <h3 class='smart-form'>Company Details</h3>
+            <div class="col-lg-6">{{ form.company_name.label_tag }}<span style="color: red;">*</span>{{ form.company_name }}</div>
+            <div class="col-lg-6">{{ form.website.label_tag }}<span style="color: red;">*</span><span class='large-size' style="font-size: 13px;"> (Make sure to enter complete URL)</span> {{ form.website }}</div>
+          </div>
+          <div class="row">
+            <h3 class='smart-form'>Requirement Details</h3>
+            <div class="col-lg-4">{{ form.domain.label_tag }}<span style="color: red;">*</span>{{ form.domain }}</div>
+            <div class="col-lg-8">
+              <div class="row">
+                <div class="col-lg-4">{{ form.experience.label_tag }}<span style="color: red;">*</span>{{ form.experience }}</div>
+                <div class="col-lg-4">{{ form.positions.label_tag }}<span style="color: red;">*</span>{{ form.positions }}</div>
+                <div class="col-lg-4">{{ form.salary.label_tag }} <span style="color: red;">*</span><span style="font-size: 15px;">(LPA)</span> {{ form.salary }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">{{ form.location.label_tag }}<span style="color: red;">*</span>{{ form.location }}</div>
+            <div class="col-lg-4">{{ form.email.label_tag }}<span style="color: red;">*</span>{{ form.email }}</div>
+            <div class="col-lg-4">{{ form.job_description.label_tag }}{{ form.job_description }}</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">{{ form.message.label_tag }}{{ form.message }}</div>
+          </div>
+          <div class="col-lg-12" style="display: flex; justify-content: center;">
+            <button type="submit" class="intern-submit">Submit Your Requirements</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <!--endo of form-->
+
+
+  <!--clients-->
+  
+  <div class="container">
+    <div class="heading">
+      <h1>Our Top Clients</h1>
+    </div>
+    <div class="logo-grid">
+      <div class="logo-card"><img src="{% static 'uitech/uitimg/nfenlogo-bg.png' %}" alt="WP Servis"></div>
+      <div class="logo-card"><img src="{% static 'uitech/uitimg/r_scope.png' %}" alt="Colorlib"></div>
+      <div class="logo-card"><img src="{% static 'uitech/uitimg/sky_web-removebg-preview.png' %}" alt="WPMU DEV"></div>
+      
+      <div class="logo-card"><img src="{% static 'uitech/uitimg/genpact-removebg-preview.png' %}" alt="Basic"></div>
+      <div class="logo-card"><img src="{% static 'uitech/uitimg/octad.png' %}" alt="Arcelik"></div>
+      <div class="logo-card"><img src="{% static 'uitech/uitimg/genpact-removebg-preview.png' %}" alt="WooCommerce"></div>
+      <div class="logo-card"><img src="{% static 'uitech/uitimg/envision-removebg-preview.png' %}" alt="Creative Market"></div>
+  
+      <div class="logo-card"><img src="{% static 'uitech/uitimg/infor_logo_icon_167926.png' %}" alt="Creative Market"></div>
+  
+    </div>
+  </div>
+  
+  <!--clients-->
+  
+  
+  {% endblock %}

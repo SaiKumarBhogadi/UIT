@@ -1,0 +1,14 @@
+{% extends "adminpanel/base_without_footer.html" %}
+{% block content %}
+<div class="admin-section" id="delete-section">
+    <h2 class="delete-option">Confirm Deletion</h2>
+    <p class="delete-p">Are you sure you want to delete "{{ object }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="delete-options">
+        <button type="submit" class="delete-confirm">Confirm</button>
+        <button class="delete-cancel"><a href="{% url 'adminpanel:admin_dashboard' %}">Cancel</a></button>
+    </div>
+    </form>
+</div>
+{% endblock content %}

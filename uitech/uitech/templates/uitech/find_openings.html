@@ -1,0 +1,151 @@
+{% extends 'uitech/base.html' %}
+{% block content %}
+
+<div class="container-fluid" id="interface" style="background-image: url('{% static "uitech/uitimg/interface.jpg" %}');">
+<div class="row">
+<div class="col-lg-6" id="left">
+  <div>
+    <h1>Transform Your Career <br> with UIT's Expert Job Assistance</h1>
+    <div class="interface-btn">
+      <a href="{% url 'uitech:check_your_skill' %}"><button type="button" class="btn btn-primary" id="applynows" style="width: 150px;">Check Your Skill</button></a>
+     <a href="{% url 'uitech:contact_us' %}"><button type="button" class="btn btn-primary" id="applynows" style="width: 150px;">Contact Us</button></a> 
+    </div>
+  </div>
+</div>
+<div class="col-lg-6" id="right">
+  <img src="{% static 'uitech/uitimg/interface_findjob.png' %}" alt="">
+</div>
+</div>
+</div>
+
+<script>document.addEventListener('DOMContentLoaded', function () {
+const sections = document.querySelectorAll('.content-section');
+
+function revealSection() {
+sections.forEach(section => {
+const sectionPosition = section.getBoundingClientRect().top;
+const screenPosition = window.innerHeight;
+
+if (sectionPosition < screenPosition) {
+  section.classList.add('visible');
+}
+});
+}
+
+window.addEventListener('scroll', revealSection);
+});</script>
+
+<div class="container" id="job-assistence">
+<div class="row">
+<h2>Elevate Your Career with UIT's Comprehensive Job Assistance Program</h2>
+<div class="col-lg-6" id="job-left">
+  <div class="content-section" id="section2">
+  <img src="{% static 'uitech/uitimg/job-left1.png' %}" alt=""></div>
+</div>
+<div class="col-lg-6" id="job-right">
+  <div class="content-section" id="section2">
+  <h2>Advance Your Career with UIT's Experts </h2>
+  <p>UIT (Universal Institute of Technology) offers a wide range of job opportunities across various industries
+    and skill levels, designed to match your career aspirations. We provide invaluable resources, including resume
+    optimization, interview preparation, and personalized career coaching, to help you secure your ideal job.
+
+    At UIT, we are dedicated to empowering you to take your career to new heights.
+
+  </p>
+  <a href="#register-now"><button type="button" class="btn btn-primary" id="applynows">Register Now</button></a></div>
+</div>
+</div>
+</div>
+
+
+<div class="container" >
+<h2 class="open">Openings</h2>
+<div class="openings-container">
+
+
+{% for openings in openings_data %}
+
+<div class="openings-card">
+  <div class="row">
+    <div class="col-lg-12" style="display: flex; ">
+      {% if openings.profile_pic %}
+          <img class="profile_pic" src="{{ openings.profile_pic.url }}" alt="Profile Picture" class="openings-profile-pic" style="width: 80px; height: 80px; border-radius: 50%;
+  margin-right: 15px;">
+      {% else %}
+          <img src="{% static 'uitech/uitimg/hr.jpeg' %}" alt="Profile Picture" class="openings-profile-pic">
+      {% endif %}
+      <div>
+    <h3 class="name"> {{ openings.full_name }} </h3>
+    <p class="blues"> {{ openings.designation }} </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="openings-details">
+        <p class="domain"><span class="blues">No of Vacancies :</span><span class="voilets">{{ openings.positions }}</span></p>
+        <p class="domain"><span class="blues">Domain :</span><span class="voilets">{{ openings.domain }}</span></p>
+        <p class="domain"><span class="blues">Package :</span><span class="voilets"> {{ openings.salary }} </span></p>
+        <p class="domain"><span class="blues">Location :</span><span class="voilets"> {{ openings.location }} </span></p>
+        <p class="fresher"><span class="blues">Experience : </span><span class="voilets">{{ openings.experience }}</span></p>
+        <p class="note"><span class="blues">Note : </span><span class="text-container" id="note-text" style="color:#330077; font-weight:bold;">{{ openings.note }}</span><a href="#" class="more-link">More</a></p>
+        <a href="{% url 'uitech:check_your_skill' %}" class="apply-now"> <button >Apply Now</button></a>
+      </div>
+</div>
+
+{% endfor %}
+
+</div>
+<a href="{% url 'uitech:openings_details' %}"> <button class="view-more">View More</button></a>                                                                                                                                    
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.openings-card');
+    const maxLength = 15;
+
+    cards.forEach(card => {
+      const textContainer = card.querySelector('.text-container');
+      const moreLink = card.querySelector('.more-link');
+      const originalText = textContainer.textContent.trim(); // Full original text
+      let isExpanded = false; // Track whether full text is currently shown
+
+      // Only truncate if the text length is more than maxLength
+      if (originalText.length > maxLength) {
+        // Create truncated version of the text
+        const truncatedText = originalText.substring(0, maxLength) + '...';
+        textContainer.textContent = truncatedText; // Show truncated text initially
+
+        // Set up the click event for toggling text
+        moreLink.addEventListener('click', function (event) {
+          event.preventDefault(); // Prevent default link behavior
+
+          if (isExpanded) {
+            // If expanded, show truncated text and change link to 'More'
+            textContainer.textContent = truncatedText;
+            moreLink.textContent = 'More';
+            isExpanded = false;
+
+            // Collapse the card by reducing the height
+            card.style.maxHeight = '370px'; // Adjust this height based on your card's initial height
+          } else {
+            // If not expanded, show full text and change link to 'Less'
+            textContainer.textContent = originalText;
+            moreLink.textContent = 'Less';
+            isExpanded = true;
+
+            // Expand the card to fit the full content
+            card.style.maxHeight = card.scrollHeight + '10px'; // Adjust height to fit full content
+          }
+        });
+      } else {
+        // Hide 'More' link if text doesn't need truncating
+        moreLink.style.display = 'none';
+      }
+    });
+  });
+
+</script>
+
+
+{% endblock %}

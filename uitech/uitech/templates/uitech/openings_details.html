@@ -1,0 +1,155 @@
+{% extends 'uitech/base2.html' %}
+
+{% block content %}
+
+<!--Search Field-->
+
+<div class="container" style="padding-top: 70px;padding-bottom:40px;">
+    <h2 class="open">Openings</h2>
+    <!-- Search and Filter Form -->
+    <form method="GET" action="" class="mb-4">
+        <input type="text" name="search" placeholder="Search by name, domain, or note" value="{{ request.GET.search }}" class="form-control mb-3">
+
+        <div class="row mb-3">
+            <div class="col">
+                <select name="domain" class="form-control">
+                    <option value="">Filter by Domain</option>
+                    {% for domain in distinct_domains %}
+                    <option value="{{ domain }}" {% if request.GET.domain == domain %}selected{% endif %}>{{ domain }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <select name="experience" class="form-control">
+                    <option value="">Filter by Experience</option>
+                    {% for experience in distinct_experiences %}
+                    <option value="{{ experience }}" {% if request.GET.experience == experience %}selected{% endif %}>{{ experience }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="openings-container" style="margin-bottom:40px;">
+    {% for openings in page_obj %}
+      <div class="opening-card">
+        <div class="row">
+          <div class="col-lg-12" style="display: flex; ">
+            {% if openings_data.profile_pic %}
+                <img class="openings-profile-pic" src="{{ openings_data.profile_pic.url }}" alt="Profile Picture"/>
+            {% else %}
+                <img src="{% static 'uitech/uitimg/hr.jpeg' %}" alt="Profile Picture" class="openings-profile-pic"/>
+            {% endif %}
+            <div>
+              <h3 class="name">{{ openings.full_name }}</h3>
+              <p class="blues">{{ openings.designation }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="openings-details">
+          <p class="domain"><span class="blues">No of Vacancies :</span><span class="voilets">{{ openings.positions }}</span></p>
+          <p class="domain"><span class="blues">Domain :</span><span class="voilets">{{ openings.domain }}</span></p>
+          <p class="domain"><span class="blues">Package :</span><span class="voilets"> {{ openings.salary }} </span></p>
+          <p class="domain"><span class="blues">Location :</span><span class="voilets"> {{ openings.location }} </span></p>
+          <p class="fresher"><span class="blues">Experience : </span><span class="voilets">{{ openings.experience }}</span></p>
+          <p class="note"><span class="blues">Note : </span><span class="text-container" style="color:#330077; font-weight:bold;">{{ openings.note }}</span><a href="#" class="more-link">More</a></p>
+          <a href="{% url 'uitech:check_your_skill' %}" class="apply-now"> <button>Apply Now</button></a>
+        </div>
+      </div>
+      {% empty %}
+      <p>No openings found.</p>
+      {% endfor %}
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.opening-card');
+        const maxLength = 15;
+    
+        cards.forEach(card => {
+            const textContainer = card.querySelector('.text-container');
+            const moreLink = card.querySelector('.more-link');
+            const originalText = textContainer.textContent.trim(); // Full original text
+            let isExpanded = false; // Track whether full text is currently shown
+    
+            // Only truncate if the text length is more than maxLength
+            if (originalText.length > maxLength) {
+                // Create truncated version of the text
+                const truncatedText = originalText.substring(0, maxLength) + '...';
+                textContainer.textContent = truncatedText; // Show truncated text initially
+    
+                // Set up the click event for toggling text
+                moreLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default link behavior
+    
+                    if (isExpanded) {
+                        // If expanded, show truncated text and change link to 'More'
+                        textContainer.textContent = truncatedText;
+                        moreLink.textContent = 'More';
+                        isExpanded = false;
+    
+                        // Collapse the card by reducing the height
+                        card.style.maxHeight = '370px'; // Adjust this height based on your card's initial height
+                    } else {
+                        // If not expanded, show full text and change link to 'Less'
+                        textContainer.textContent = originalText;
+                        moreLink.textContent = 'Less';
+                        isExpanded = true;
+    
+                        // Expand the card to fit the full content
+                        card.style.maxHeight = card.scrollHeight + '10px'; // Adjust height to fit full content
+                    }
+                });
+            } else {
+                // Hide 'More' link if text doesn't need truncating
+                moreLink.style.display = 'none';
+            }
+        });
+    });
+    
+</script>
+
+
+<!-- Pagination Controls -->
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page=1" aria-label="First">
+                <span aria-hidden="true">&laquo;&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+            <a class="page-link" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ num }}">{{ num }}</a>
+        </li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                <span aria-hidden="true">&raquo;&raquo;</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "adminpanel/base_without_footer.html" %}
+{% block content %}
+<div class="container">
+    <div class="smart-hiring-admin">
+        <h2 class="blues" id="admin-hiring">Smart Hiring</h2>
+        <a href="{% url 'adminpanel:create_hiring' %}" class="add-data">
+            <button>Add New Data</button>
+        </a>
+        <table>
+            <thead>
+                <tr class="admin-header">
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Designation</th>
+                    <th>Company Name</th>
+                    <th>Domain</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in form_data %}
+                    <tr>
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.full_name }}</td>
+                        <td>{{ data.designation }}</td>
+                        <td>{{ data.company_name }}</td>
+                        <td>{{ data.domain }}</td>
+                        <td>
+                            <button class="add-datas">
+                                <a href="{% url 'adminpanel:hiring_detail' data.id %}">View</a>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "adminpanel/base_without_footer.html" %}
+{% block content %}
+<div class="hiring_form-section">
+    <div class="container" id="formbox">
+        <div class="row" id="formrow">
+            <h1 class="text-center">Create Candidate Requirement</h1>
+            <div class="col-lg-12">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                    <h3 class='smart-form'>HR Details</h3>
+                    <div class="col-lg-6">{{ form.full_name.label_tag }}<span style="color: red;">*</span>{{ form.full_name }}</div>
+                    <div class="col-lg-6">{{ form.designation.label_tag }}<span style="color: red;">*</span>{{ form.designation }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">{{ form.phone.label_tag }}<span style="color: red;">*</span>{{ form.phone }}</div>
+                    <div class="col-lg-6">{{ form.profile_pic.label_tag }}<p class='font-bold'>(Optional)</p> {{ form.profile_pic }}</div>
+                  </div>
+                  <div class="row">
+                    <h3 class='smart-form'>Company Details</h3>
+                    <div class="col-lg-6">{{ form.company_name.label_tag }}<span style="color: red;">*</span>{{ form.company_name }}</div>
+                    <div class="col-lg-6">{{ form.website.label_tag }}<span style="color: red;">*</span><p class='font-bold'>(Make sure to enter complete URL)</p> {{ form.website }}</div>
+                  </div>
+                  <div class="row">
+                    <h3 class='smart-form'>Requirement Details</h3>
+                    <div class="col-lg-4">{{ form.domain.label_tag }}<span style="color: red;">*</span>{{ form.domain }}</div>
+                    <div class="col-lg-8">
+                      <div class="row">
+                        <div class="col-lg-4">{{ form.experience.label_tag }}<span style="color: red;">*</span>{{ form.experience }}</div>
+                        <div class="col-lg-4">{{ form.positions.label_tag }}<span style="color: red;">*</span>{{ form.positions }}</div>
+                        <div class="col-lg-4">{{ form.salary.label_tag }} <span style="color: red;">*</span><span style="font-size: 15px;">(LPA)</span> {{ form.salary }}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">{{ form.location.label_tag }}<span style="color: red;">*</span>{{ form.location }}</div>
+                    <div class="col-lg-4">{{ form.email.label_tag }}<span style="color: red;">*</span>{{ form.email }}</div>
+                    <div class="col-lg-4">{{ form.job_description.label_tag }}{{ form.job_description }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">{{ form.message.label_tag }}{{ form.message }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">{{ form.note.label_tag }}{{ form.note }}</div>
+                  </div>
+                    <div class="col-lg-12" style="display: flex; justify-content: center;">
+                        <input type="submit" class="intern-submit" value="Save Requirement">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

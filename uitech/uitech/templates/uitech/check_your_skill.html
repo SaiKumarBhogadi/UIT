@@ -1,0 +1,136 @@
+{% extends 'uitech/base2.html' %}
+{% block content %}
+<div class="container" id="team">
+    <div class="row">
+      <div class="col-lg-6">
+        <h1 style="margin-top: 120px; ">Check Your Skill – Qualify and Connect with HR!
+        </h1>
+        <h3>Unlock Your Career Potential!</h3>
+        <p>
+          Designed specifically for job seekers, our Check Your Skill program helps you demonstrate your expertise in key domains like JAVA, Python Fullstack, and more. After completing the skill test, only qualified candidates will be referred by UIT directly to HRs of top companies, ensuring your profile stands out. 
+          Take the test, prove your talent, and let UIT showcase your profile to the right recruiters. Are you ready to take the leap? </p>
+        <a href="#register-now"> <button type="button" class="btn btn-primary" id="applynow">Enroll Now</button></a>
+      </div>
+      <div class="col-lg-6" id="teamimg2" style="display: flex; justify-content: center;">
+        <img src="{% static 'uitech/uitimg/skillsbg.png' %}" alt="" style="margin-top: 120px; ">
+      </div>
+    </div>
+</div>
+
+
+<script>document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll('.content-section');
+
+    function revealSection() {
+      sections.forEach(section => {
+        const sectionPosition = section.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight;
+
+        if (sectionPosition < screenPosition) {
+          section.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealSection);
+  });</script>
+
+<!-- Contact Form Section -->
+<div class="container">
+    <section class="contact-form-section">
+      <div class="row">
+        <h2 id="register-now" style="margin-top: 50px;">Register Here</h2>
+        <div class="col-lg-6" id="form-img">
+          <img src="{% static 'uitech/uitimg/check_form_img.jpg' %}" alt="">
+        </div>
+        <div class="col-lg-6">
+          <div class="content">
+
+            <p>For skill assessments or to check your current level, please fill out the form below. Our team will evaluate your details and provide feedback as soon as possible.
+
+            </p>
+            <form class="contact-form" action="#" method="post">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label for="name">First Name:</label>
+                  <input type="text" id="name" name="name" required>
+                </div>
+                <div class="col-lg-6">
+                  <label for="name">Last Name:</label>
+                  <input type="text" id="name" name="name" required>
+                </div>
+              </div>
+             <div class="row">
+              <div class="col-lg-6">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="col-lg-6">
+             <label for="phone">Contact No:</label>
+                  <input type="tel" id="phone" name="phone">
+              </div>
+             </div>
+
+             
+            <div class="row">
+            
+                <div class="col-lg-6">
+                  <label for="subject">Year of Passout</label>
+                  <select id="subject" name="subject">
+                    <option value="Select">--Select--</option>
+                    <option value="C Language">2021</option>
+                    <option value="C++">2022</option>
+                    <option value="Python">2023</option>
+                    <option value="Java">2024</option>
+                    
+                  </select>
+                </div>
+                <div class="col-lg-6">
+                  <label for="subject">Select Course</label>
+                  <select id="subject" name="subject">
+                    <option value="Select">Select</option>
+                    <option value="C Language">C Language</option>
+                    <option value="C++">C++</option>
+                    <option value="Python">Python</option>
+                    <option value="Java">Java</option>
+                    <option value="Node">Node</option>
+                    <option value="Digital Marketing">Digital Marketing</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+            </div>
+             
+
+             
+
+
+              <label for="subject">Where Did You Here abour Me</label>
+              <select id="subject" name="subject">
+                <option value="Select">Select</option>
+                <option value="C Language">Instagram</option>
+                <option value="C++">Facebook</option>
+                <option value="Python">Linkedln</option>
+                <option value="Java">Youtube</option>
+                <option value="Node">Other</option>
+              </select>
+
+              <label for="message">Message:</label>
+              <textarea id="message" name="message" rows="3" required></textarea>
+              <div style="display: flex;">
+              <input type="checkbox" id="checkbox" name="" value="" >
+              <label for="" style="margin-left: 10px;"> I have read and agree to the Terms and Conditions and Privacy Policy 
+
+                Note: At present we are providing only Offline Course.
+                
+                </label></div>
+              <button type="submit">Submit</button>
+            </form>
+
+          </div>
+        </div>
+        
+
+      </div>
+    </section>
+</div>
+{% endblock %}
